@@ -12,20 +12,18 @@ let overlays = {
   overlay25: require('./overlay25.svg'),
   overlay32: require('./overlay32.svg')
 };
-// TODO: update to actual video URL
-let URL = 'http://mpegmedia.abc.net.au/news/video/201904/Notredame1704.mp4';
+let URL = 'http://mpegmedia.abc.net.au/news/video/201904/hdchurchopt.mp4';
 
 // Detect mobile url
-// TODO: use actual mobile overlays and video URL
 if (document.location.href.indexOf('mobile') > -1) {
   overlays = {
-    overlay6: require('./overlay6.svg'),
-    overlay13: require('./overlay13.svg'),
-    overlay18: require('./overlay18.svg'),
-    overlay25: require('./overlay25.svg'),
-    overlay32: require('./overlay32.svg')
+    overlay6: require('./mobile-overlay6.svg'),
+    overlay13: require('./mobile-overlay13.svg'),
+    overlay18: require('./mobile-overlay18.svg'),
+    overlay25: require('./mobile-overlay25.svg'),
+    overlay32: require('./mobile-overlay32.svg')
   };
-  URL = 'http://mpegmedia.abc.net.au/news/video/201904/Notredame1704.mp4';
+  URL = 'http://mpegmedia.abc.net.au/news/video/201904/mobilechurchopt.mp4';
 }
 
 export default class App extends React.Component {
