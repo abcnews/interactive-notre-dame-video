@@ -115,6 +115,7 @@ export default class App extends React.Component {
               );
             })}
           </Video>
+          <div className={styles.attribution}>Google Earth: Digital Globe</div>
         </Scrollyteller>
       </div>
     );
