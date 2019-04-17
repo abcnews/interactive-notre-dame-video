@@ -45,10 +45,7 @@ export default class App extends React.Component {
     this.setState(state => {
       const updates = {};
 
-      if (typeof config.time !== 'undefined' && state.time !== config.time) {
-        updates.hasOverlay = false;
-        console.log('NEW TIME:', config.time);
-      }
+      if (typeof config.time !== 'undefined' && state.time !== config.time) updates.hasOverlay = false;
       if (config.time) updates.time = config.time;
 
       return updates;
