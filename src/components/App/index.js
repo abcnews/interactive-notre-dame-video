@@ -26,6 +26,33 @@ if (document.location.href.indexOf('mobile') > -1) {
   URL = 'http://mpegmedia.abc.net.au/news/video/201904/mobilechurchopt.mp4';
 }
 
+const fallbackImages = [
+  {
+    time: 6,
+    src: require('./fallback6.jpg')
+  },
+  {
+    time: 13,
+    src: require('./fallback13.jpg')
+  },
+  {
+    time: 18,
+    src: require('./fallback18.jpg')
+  },
+  {
+    time: 25,
+    src: require('./fallback25.jpg')
+  },
+  {
+    time: 32,
+    src: require('./fallback32.jpg')
+  },
+  {
+    time: 38,
+    src: require('./fallback38.jpg')
+  }
+].reverse();
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -67,6 +94,16 @@ export default class App extends React.Component {
           panelClassName={`Block-content u-layout u-richtext`}
           onMarker={this.onMarker}>
           <Video src={URL} targetTime={time} onTargetTimeReached={this.onTargetTimeReached}>
+            {fallbackImages.map(img => {
+              return (
+                <img
+                  className={`${styles.fallbackImage} ${time <= img.time ? styles.visible : ''}`}
+                  key={img.src}
+                  src={img.src}
+                />
+              );
+            })}
+
             {Object.keys(overlays).map(key => {
               const isOverlayVisible = [`overlay${time}`, `overlay${time - 1}`, `overlay${time + 1}`].indexOf(key) > -1;
               return (
