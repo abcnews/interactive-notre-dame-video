@@ -1,6 +1,6 @@
-# interactive-notre-dame-video
+# Notre Dame Video Scrollyteller
 
-A project generated from [aunty](https://github.com/abcnews/aunty)'s `react` project template.
+Look around Notre Dame before the 2019 fire: [https://www.abc.net.au/news/2019-04-18/notre-dame-walk-through/11024512](https://www.abc.net.au/news/2019-04-18/notre-dame-walk-through/11024512)
 
 ## Authors
 
