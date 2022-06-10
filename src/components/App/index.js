@@ -1,55 +1,42 @@
+import Scrollyteller from '@abcnews/scrollyteller';
+import Video from '@abcnews/scrollyteller-video';
 import React from 'react';
 import styles from './styles.scss';
 
-const Scrollyteller = require('@abcnews/scrollyteller');
-import Video from '@abcnews/scrollyteller-video';
-
 // Desktop/default
 let overlays = {
-  overlay6: require('./overlay6.svg'),
-  overlay13: require('./overlay13.svg'),
-  overlay18: require('./overlay18.svg'),
-  overlay25: require('./overlay25.svg'),
-  overlay32: require('./overlay32.svg')
+  overlay6: `${__webpack_public_path__}overlay6.svg`,
+  overlay13: `${__webpack_public_path__}overlay13.svg`,
+  overlay18: `${__webpack_public_path__}overlay18.svg`,
+  overlay25: `${__webpack_public_path__}overlay25.svg`,
+  overlay32: `${__webpack_public_path__}overlay32.svg`
 };
 let URL = 'http://mpegmedia.abc.net.au/news/video/201904/hdchurchopt.mp4';
-
-// Detect mobile url
-if (document.location.href.indexOf('mobile') > -1) {
-  overlays = {
-    overlay6: require('./mobile-overlay6.svg'),
-    overlay13: require('./mobile-overlay13.svg'),
-    overlay18: require('./mobile-overlay18.svg'),
-    overlay25: require('./mobile-overlay25.svg'),
-    overlay32: require('./mobile-overlay32.svg')
-  };
-  URL = 'http://mpegmedia.abc.net.au/news/video/201904/mobilechurchopt.mp4';
-}
 
 const fallbackImages = [
   {
     time: 6,
-    src: require('./fallback6.jpg')
+    src: `${__webpack_public_path__}fallback6.jpg`
   },
   {
     time: 13,
-    src: require('./fallback13.jpg')
+    src: `${__webpack_public_path__}fallback13.jpg`
   },
   {
     time: 18,
-    src: require('./fallback18.jpg')
+    src: `${__webpack_public_path__}fallback18.jpg`
   },
   {
     time: 25,
-    src: require('./fallback25.jpg')
+    src: `${__webpack_public_path__}fallback25.jpg`
   },
   {
     time: 32,
-    src: require('./fallback32.jpg')
+    src: `${__webpack_public_path__}fallback32.jpg`
   },
   {
     time: 38,
-    src: require('./fallback38.jpg')
+    src: `${__webpack_public_path__}fallback38.jpg`
   }
 ].reverse();
 
@@ -87,37 +74,36 @@ export default class App extends React.Component {
     const { time, hasOverlay } = this.state;
 
     return (
-      <div className={styles.base}>
-        <Scrollyteller
-          panels={scrollyteller.panels}
-          className={`Block is-richtext is-piecemeal ${styles.scrollyteller}`}
-          panelClassName={`Block-content u-layout u-richtext`}
-          onMarker={this.onMarker}>
-          <Video src={URL} targetTime={time} onTargetTimeReached={this.onTargetTimeReached}>
-            {fallbackImages.map(img => {
-              return (
-                <img
-                  className={`${styles.fallbackImage} ${time <= img.time ? styles.visible : ''}`}
-                  key={img.src}
-                  src={img.src}
-                />
-              );
-            })}
+      <Scrollyteller
+        panels={scrollyteller.panels}
+        className={`Block is-richtext is-piecemeal ${styles.scrollyteller}`}
+        panelClassName={`Block-content u-layout u-richtext ${styles.panel}`}
+        onMarker={this.onMarker}
+      >
+        <Video src={URL} targetTime={time * 1000} onTargetTimeReached={this.onTargetTimeReached}>
+          {fallbackImages.map((img, index) => {
+            return (
+              <img
+                className={`${styles.fallbackImage} ${time <= img.time ? styles.visible : ''}`}
+                key={index}
+                src={img.src}
+              />
+            );
+          })}
 
-            {Object.keys(overlays).map(key => {
-              const isOverlayVisible = [`overlay${time}`, `overlay${time - 1}`, `overlay${time + 1}`].indexOf(key) > -1;
-              return (
-                <img
-                  className={`${styles.overlay} ${hasOverlay && isOverlayVisible ? styles.visible : ''}`}
-                  key={key}
-                  src={overlays[key]}
-                />
-              );
-            })}
-          </Video>
-          <div className={styles.attribution}>Google Earth: Digital Globe</div>
-        </Scrollyteller>
-      </div>
+          {Object.keys(overlays).map(key => {
+            const isOverlayVisible = [`overlay${time}`, `overlay${time - 1}`, `overlay${time + 1}`].indexOf(key) > -1;
+            return (
+              <img
+                className={`${styles.overlay} ${hasOverlay && isOverlayVisible ? styles.visible : ''}`}
+                key={key}
+                src={overlays[key]}
+              />
+            );
+          })}
+        </Video>
+        <div className={styles.attribution}>Google Earth: Digital Globe</div>
+      </Scrollyteller>
     );
   }
 }

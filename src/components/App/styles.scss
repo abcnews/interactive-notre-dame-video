@@ -1,6 +1,33 @@
-.base {
+.scrollyteller {
   video {
     z-index: 10;
+  }
+}
+
+.panel {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.panel::before {
+  content: none !important;
+}
+
+.panel > * {
+  padding: 12px 28px !important;
+  width: 83.333333%;
+  color: #000 !important;
+}
+
+@media (min-width: 668px) {
+  .panel > * {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 980px) {
+  .panel > * {
+    padding: 18px 28px !important;
   }
 }
 

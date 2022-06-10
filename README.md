@@ -5,3 +5,4 @@ Look around Notre Dame before the 2019 fire: [https://www.abc.net.au/news/2019-0
 ## Authors
 
 - Nathan Hoad ([nathan@nathanhoad.net](mailto:nathan@nathanhoad.net))
+- Colin Gourlay ([gourlay.colin@abc.net.au](mailto:gourlay.colin@abc.net.au))
